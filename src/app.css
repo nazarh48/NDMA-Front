@@ -1,0 +1,82 @@
+#app {
+  /* max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center; */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+}
+.maplibregl-ctrl-top-left{
+  top: 5rem !important;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.preact:hover {
+  filter: drop-shadow(0 0 2em #673ab8aa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.custom-cursor {
+  cursor: pointer;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.customer_container{
+  @apply p-10
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+.MenuArea {
+  width: 8%;
+  float: left;
+}
+.MapArea {
+  width: 92%;
+  float: left;
+}
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+.control-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 320px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  padding: 12px 24px;
+  margin: 20px;
+  font-size: 13px;
+  line-height: 2;
+  color: #6b6b76;
+  text-transform: uppercase;
+  outline: none;
+}

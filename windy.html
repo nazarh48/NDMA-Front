@@ -1,0 +1,499 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+  <style>
+    #windy {
+      width: 100%;
+      height: 99%;
+    }
+
+    #windy #logo {
+      display: none !important;
+    }
+
+    #checkboxesDiv {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 5px 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      display: inline-block;
+      cursor: pointer;
+      position: absolute;
+      top: 45px;
+      left: 25px;
+    }
+
+    .line1,
+    .line2,
+    .line3 {
+      width: 35px;
+      height: 5px;
+      background-color: #FFD580;
+      margin: 6px 0;
+      transition: 0.4s;
+
+    }
+
+    .change .line1 {
+      transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .line2 {
+      opacity: 0;
+    }
+
+    .change .line3 {
+      transform: translate(0, -11px) rotate(45deg);
+    }
+
+    .ncop {
+      position: absolute;
+      top: 12px;
+      left: 60px;
+      opacity: 0.4;
+      font-size: 64px;
+      font-family: sans-serif;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="windy"></div>
+  <div class="ncop">NCOP</div>
+
+  <div id="checkboxesDiv"></div>
+  <div class="container" onclick="BurgerFunction(this)">
+    <div class="round_close">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </div>
+  <script>
+    function BurgerFunction(x) {
+      const burgerContainer = document.querySelector('.container')
+      const checkboxesDiv = document.getElementById('checkboxesDiv')
+      const round_close = document.querySelector(".round_close")
+      const line1 = document.querySelector(".line1")
+      const line2 = document.querySelector(".line2")
+      const line3 = document.querySelector(".line3")
+
+      round_close.setAttribute("style", "padding:3px 3px;border-radius:50%;background-color:#9e1b32;")
+      if (x.classList.toggle("change")) {
+        checkboxesDiv.style.display = "block"
+        burgerContainer.setAttribute("style", `left:350px;top:22px;`)
+        line1.setAttribute("style", "background-color:white;")
+        line2.setAttribute("style", "background-color:white;")
+        line3.setAttribute("style", "background-color:white;")
+      }
+      else {
+        checkboxesDiv.style.display = "none"
+        burgerContainer.style.left = "25px"
+        round_close.setAttribute("style", "border-radius:0;")
+        line1.setAttribute("style", "background-color:#FFD580;")
+        line2.setAttribute("style", "background-color:#FFD580;")
+        line3.setAttribute("style", "background-color:#FFD580;")
+      }
+    }
+    const options = {
+      key: 'kgxHFscUXin32hwUjaOF46iNrwn5kQwG', // REPLACE WITH YOUR KEY !!!
+      lat: 33.3,
+      lon: 73.3,
+      zoom: 4,
+    };
+    function addWmsLayer(windyAPI, layer) {
+      const wmsUrl = `http://ndma.ddns.net:8600/geoserver/${layer.workspace}/wms`;
+
+      const wmsLayer = L.tileLayer.wms(wmsUrl, {
+        layers: layer.name,
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.1',
+      }).addTo(windyAPI.map);
+    }
+    windyInit(options, windyAPI => {
+
+      //     const button = L.DomUtil.create("button", "toggle-picker");
+      // button.innerHTML = "Toggle Picker";
+      // button.onclick = () => {
+      //   const pickerContainer = document.querySelector(".picker-container");
+      //   pickerContainer.classList.toggle("picker-container--visible");
+      // };
+      // windyAPI.map.getContainer().appendChild(button);
+
+      const countries = [
+        //*************** */ TO DESIGN TOTAL COUNT OF LAYERS AUTOMETICALLYS***********************
+
+        ////////////////   BOUNDARIES //////////////////
+        {
+          title: "Political/Provincial Boundary-SoP",
+          name: "SoP:PoliticalMap — Boundary",
+          label: "PoliticalMap — Boundary",
+          visible: false,
+          workspace: "SoP",
+        },
+        // {
+        //   title: "Provincial Boundaries",
+        //   name: "MHVRA:provincial_boundary",
+        //   label: "provincial_boundary",
+        //   visible: false,
+        //   workspace: "MHVRA",
+        // },
+
+        // {
+        //   title: "Provincial Boundaries-RAU",
+        //   name: "MHVRA:administrtative_boundaries",
+        //   label: "administrtative_boundaries",
+        //   visible: false,
+        //   workspace: "MHVRA",
+        // },
+        {
+          title: "District Boundaries-SoP",
+          name: "SoP:pak_admin_boundarypoly_sop",
+          label: "pak_admin_boundarypoly_sop",
+          visible: false,
+          workspace: "SoP",
+        },
+        {
+          title: "District Boundaries-RAU",
+          name: "MHVRA:district boundary",
+          label: "district boundary",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Tehsil Boundary-RAU",
+          name: "MHVRA:tehsil boundary",
+          label: "tehsil boundary",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        /////////////////  FLOOD ANALYSIS    /////////////
+        {
+          title: "Dams and Water Bodies-RAU",
+          name: "MHVRA:dams_water_bodies",
+          label: "dams_water_bodies",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "River Headworks-RAU",
+          name: "MHVRA:river headworks",
+          label: "river headworks",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Bridges Point-SOP",
+          name: "SoP:Road_Bridges_Point_SOP",
+          label: "Road_Bridges_Point_SOP",
+          visible: false,
+          workspace: "SoP",
+        },
+        {
+          title: "Rivers-RAU",
+          name: "MHVRA:rivers",
+          label: "rivers",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Streams and Nullah-RAU",
+          name: "MHVRA:	streams and nullah",
+          label: "streams and nullah",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "River Flow Data-FFD",
+          name: "FFD:flood_data",
+          label: "flood_data",
+          visible: false,
+          workspace: "FFD",
+        },
+
+        ////////////////////   GLOF   //////////////////
+        {
+          title: "Vulnerable Glacial Lakes-RAU",
+          name: "MHVRA:vulnerable_glacial_lakes",
+          label: "vulnerable_glacial_lakes",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        ///////////////// TRANSPORTATION NETWORK //////////////////////
+        {
+          title: "NHA Road Network-NHA",
+          name: "NHA:NHA_Road_Network",
+          label: "NHA_Road_Network",
+          visible: false,
+          workspace: "NHA",
+        },
+        {
+          title: "Roads Line-SoP",
+          name: "SoP:Roads_Line_SOP",
+          label: "Roads_Line_SOP",
+          visible: false,
+          workspace: "SoP",
+        },
+        {
+          title: "Railway Line-SoP",
+          name: "SoP:Railway_Line_SOP",
+          label: "Railway_Line_SOP",
+          visible: false,
+          workspace: "SoP",
+        },
+        {
+          title: "Railway Tracks-RAU",
+          name: "MHVRA:railway tracks",
+          label: "railway tracks",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Airports-SoP",
+          name: "MHVRA:airports",
+          label: "airports",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        // {
+        //   name: "MHVRA:major roads",
+        //   label: "major roads",
+        //   visible: false,
+        //   workspace: "MHVRA",
+        // },
+        // {
+        //   name: "MHVRA:motorways",
+        //   label: "motorways",
+        //   visible: false,
+        //   workspace: "MHVRA",
+        // },
+
+        ///////////////////  CITIES  and SETTLEMENTS     /////////////////////////////
+        {
+          title: "District Capitals-RAU",
+          name: "MHVRA:district capitals",
+          label: "district capitals",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Major Cities-RAU",
+          name: "MHVRA:major cities",
+          label: "major cities",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Tehsil HQs-SoP",
+          name: "SoP:Road — Block_Point - DistTehsil HQs",
+          label: "Road — Block_Point - DistTehsil HQs",
+          visible: false,
+          workspace: "SoP",
+        },
+        {
+          title: "Settlements-RAU",
+          name: "MHVRA:settlements",
+          label: "settlements",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        ////////////////////// SEISMIC DATA      ////////////////////////
+        {
+          title: "Peak Ground Acceleration-RAU",
+          name: "MHVRA:pga",
+          label: "pga",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Faultlines-RAU",
+          name: "MHVRA:faultlines",
+          label: "faultlines",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Geology-RAU",
+          name: "MHVRA:geology",
+          label: "geology",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        //////////////////  STAKEHOLDERS DATA    //////////////////////
+        {
+          title: "Wheat Production-MNFSR",
+          name: "MNFSR:production_view3",
+          label: "production_view3",
+          visible: false,
+          workspace: "MNFSR",
+        },
+
+        {
+          title: "District Population-PBS",
+          name: "PBS:district_population_pbs",
+          label: "district_population_pbs",
+          visible: false,
+          workspace: "PBS",
+        },
+
+        {
+          title: "NGOs Data-NDMA",
+          name: "NGO:ngos_view",
+          label: "ngos_view",
+          visible: false,
+          workspace: "NGO",
+        },
+
+        ///////////////////  COASTLINES and SEAPORTS      /////////////////////
+        {
+          title: "Coastline-RAU",
+          name: "MHVRA:coastline",
+          label: "coastline",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Coastline Areas-RAU",
+          name: "MHVRA:coastline areas",
+          label: "coastline areas",
+          visible: false,
+          workspace: "MHVRA",
+        },
+        {
+          title: "Seaports-RAU",
+          name: "MHVRA:seaports",
+          label: "seaports",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        ////////////////////////////////////////
+        {
+          title: "Health Facilities-RAU",
+          name: "MHVRA:health facilities",
+          label: "health facilities",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        {
+          title: "Humanitarian Relief Facilities-RAU",
+          name: "MHVRA:hrf",
+          label: "hrf",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        ////////////   INFRASTRUCTURES  ///////////////
+        {
+          title: "Hydel Power Stations-RAU",
+          name: "MHVRA:hydel power stations",
+          label: "hydel power stations",
+          visible: false,
+          workspace: "MHVRA",
+        },
+
+        // {
+        //   name: "PMD:synop_currentdata",
+        //   label: "synop_currentdata",
+        //   visible: false,
+        //   workspace: "PMD",
+        // },
+        // {
+        //   name: "PMD:nwp_forecast_3_days",
+        //   label: "nwp_forecast_3_days",
+        //   visible: false,
+        //   workspace: "PMD",
+        // },
+        // {
+        //   name: "PMD:getcurrent_pmd",
+        //   label: "getcurrent_pmd",
+        //   visible: false,
+        //   workspace: "PMD",
+        // },
+      ] // array of countries
+
+      countries.forEach(country => { // create a checkbox for each country
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = country;
+        checkbox.onclick = function () { // attach an onclick event handler to each checkbox
+          const isChecked = this.checked;
+          if (isChecked) {
+            addWmsLayer(windyAPI, country);
+          } else {
+            windyAPI.map.eachLayer(function (layer) {
+              if (layer.options.layers == country.name) {
+                console.log(layer.options.layers)
+                windyAPI.map.removeLayer(layer);
+              }
+            });
+          }
+        };
+        const label = document.createElement('label');
+        label.setAttribute("style", "font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;text-transform: capitalize;")
+        checkboxesDiv.setAttribute("style", "display:none;overflow-y: scroll;")
+        label.for = country.label;
+        label.innerText = country.label;
+        checkboxesDiv.appendChild(checkbox);
+        checkboxesDiv.appendChild(label);
+        checkboxesDiv.appendChild(document.createElement('br')); // add a line break after each checkbox
+      });
+
+      const { picker, utils, broadcast, store } = windyAPI;
+      // Set the overlay to "wind" and level to "surface" for Pakistan
+
+      picker.on('pickerOpened', ({ lat, lon, values, overlay }) => {
+        // -> 48.4, 14.3, [ U,V, ], 'wind'
+        console.log('opened', lat, lon, values, overlay);
+
+        const windObject = utils.wind2obj(values);
+        console.log(windObject);
+      });
+
+      picker.on('pickerMoved', ({ lat, lon, values, overlay }) => {
+        // picker was dragged by user to latLon coords
+        console.log('moved', lat, lon, values, overlay);
+      });
+
+      picker.on('pickerClosed', () => {
+        // picker was closed
+      });
+
+      store.on('pickerLocation', ({ lat, lon }) => {
+        console.log(lat, lon);
+
+        const { values, overlay } = picker.getParams();
+        console.log('location changed', lat, lon, values, overlay);
+      });
+      store.set("latlon", [30.375, 69.345]);
+
+      // Wait since wather is rendered
+      broadcast.once('redrawFinished', () => {
+        // Opening of a picker (async)
+        picker.open({ lat: 33.3, lon: 73.3 });
+
+        addWmsLayer(windyAPI);
+      });
+    });
+
+  </script>
+</body>
+
+</html>

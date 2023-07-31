@@ -1,0 +1,196 @@
+{
+    "data": [
+        {
+            "id": "be09d395-5d95-4aff-8001-e543fda721cb",
+            "created_at": "2023-07-26T04:53:32.013530+0000",
+            "updated_at": "2023-07-26T04:55:57.399833+0000",
+            "pipeline_id": "4f549284-2b70-11ee-b635-523969083ba3",
+            "output_id": "a8fc3dde-a3e8-11e7-9793-ae4260ee3b4b",
+            "status": "complete",
+            "message": "Processing complete. 1 result available",
+            "interval": {
+                "start_date": "2023-07-11",
+                "end_date": "2023-07-19"
+            },
+            "total_interval_cost": 0.0,
+            "overall_metadata": {
+                "scene_height": 260,
+                "scene_width": 376,
+                "filled_area_km2": 4.78,
+                "filled_area_percentage_of_aoi": 100.0,
+                "cloud_cover_percentage": 0.0,
+                "cloud_cover_percentage_of_aoi": 0.0,
+                "visible_area_km2": 4.78,
+                "visible_area_percentage": 51.0,
+                "visible_area_percentage_of_aoi": 100.0
+            },
+            "results": [
+                {
+                    "created_at": "2023-07-26T05:03:09.214314",
+                    "updated_at": "2023-07-26T04:55:57.315877+0000",
+                    "preview_url": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/preview/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7_preview.png",
+                    "visual_url": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/visual/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7_visual.png",
+                    "analytics_url": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/analytic/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7.tif",
+                    "metadata_url": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/metadata/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7_metadata.json",
+                    "vector_files": [
+                        {
+                            "name": "cloud_mask_vector",
+                            "description": "GeoJSON vector mask of cloud cover",
+                            "uri": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/vector_file/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7_vector.json"
+                        }
+                    ],
+                    "raster_files": [
+                        {
+                            "name": "cloud_mask_raster",
+                            "description": "GeoTiff mask of cloud cover",
+                            "uri": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/raster_file/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7_masks.tif"
+                        },
+                        {
+                            "name": "pam_metadata",
+                            "description": "PAM XML metadata format for ESRI ArcGIS",
+                            "uri": "https://s3-us-west-2.amazonaws.com/aoi-processed-images-prod/4f549284-2b70-11ee-b635-523969083ba3/28b51f81-b1dc-437c-b843-c54b63f322fd/raster_file/SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7.tif.aux.xml"
+                        }
+                    ],
+                    "capture_time": "2023-07-19T05:46:39.023999+0000",
+                    "metadata": {
+                        "processing_applied": {
+                            "atmospheric_correction_toa": false,
+                            "pansharpening": false,
+                            "cloud_masking": false,
+                            "haze_masking": false
+                        },
+                        "bands": [
+                            {
+                                "name": "red",
+                                "no_data_value": 0,
+                                "data_type": "uint16",
+                                "unit": "boa_reflectance",
+                                "spectral_wavelength": null,
+                                "raster_width": 371,
+                                "raster_height": 251
+                            },
+                            {
+                                "name": "green",
+                                "no_data_value": 0,
+                                "data_type": "uint16",
+                                "unit": "boa_reflectance",
+                                "spectral_wavelength": null,
+                                "raster_width": 371,
+                                "raster_height": 251
+                            },
+                            {
+                                "name": "blue",
+                                "no_data_value": 0,
+                                "data_type": "uint16",
+                                "unit": "boa_reflectance",
+                                "spectral_wavelength": null,
+                                "raster_width": 371,
+                                "raster_height": 251
+                            },
+                            {
+                                "name": "flags",
+                                "no_data_value": 5,
+                                "data_type": "uint8",
+                                "unit": "class",
+                                "spectral_wavelength": null,
+                                "raster_width": 371,
+                                "raster_height": 251
+                            }
+                        ],
+                        "resolution_y": 10,
+                        "resolution_x": 10,
+                        "map_crs": "",
+                        "sensor_mode": "-",
+                        "source": "Sentinel-2-L2A",
+                        "cloud_cover_percentage": 0,
+                        "valid_pixels_percentage": 51,
+                        "name": "SKYWATCH_S2_MS_20230719T0546_TC_Tile_0_0_b8b7",
+                        "size_in_mb": 0,
+                        "corner_coordinates": [
+                            [
+                                71.45402346067611,
+                                30.210026439966335
+                            ],
+                            [
+                                71.49244686390911,
+                                30.210026439966335
+                            ],
+                            [
+                                71.49244686390911,
+                                30.187473818193162
+                            ],
+                            [
+                                71.45402346067611,
+                                30.187473818193162
+                            ],
+                            [
+                                71.45402346067611,
+                                30.210026439966335
+                            ]
+                        ]
+                    }
+                }
+            ],
+            "alternate_search_results": [
+                {
+                    "index": 0,
+                    "search_result_id": "bdfa2b40-e740-431b-bbbe-f540069cad4b",
+                    "source": "Sentinel-2-L2A",
+                    "capture_date": "2023-07-19",
+                    "resolution": 10.0,
+                    "price_per_km2": 0.0,
+                    "max_interval_cost": 0.0,
+                    "aoi_coverage_percentage": 100.0,
+                    "filled_coverage_percentage": 100.0,
+                    "processing_status": "delivered"
+                },
+                {
+                    "index": 1,
+                    "search_result_id": "afba9d7f-aa92-41c1-9fdc-624cd86e2af8",
+                    "source": "Sentinel-2",
+                    "capture_date": "2023-07-14",
+                    "resolution": 10.0,
+                    "price_per_km2": 0,
+                    "max_interval_cost": 0,
+                    "aoi_coverage_percentage": null,
+                    "filled_coverage_percentage": null,
+                    "processing_status": "not processed - low priority"
+                }
+            ]
+        },
+        {
+            "id": "e8eee684-c848-4dbe-9bf5-219c3af8881a",
+            "created_at": "2023-07-26T04:53:31.948655+0000",
+            "updated_at": "2023-07-26T04:53:52.513175+0000",
+            "pipeline_id": "4f549284-2b70-11ee-b635-523969083ba3",
+            "output_id": "a8fc3dde-a3e8-11e7-9793-ae4260ee3b4b",
+            "status": "complete",
+            "message": "Processing complete",
+            "interval": {
+                "start_date": "2023-07-20",
+                "end_date": "2023-07-20"
+            },
+            "total_interval_cost": null,
+            "overall_metadata": {
+                "scene_height": null,
+                "scene_width": null,
+                "filled_area_km2": null,
+                "filled_area_percentage_of_aoi": null,
+                "cloud_cover_percentage": null,
+                "cloud_cover_percentage_of_aoi": null,
+                "visible_area_km2": null,
+                "visible_area_percentage": null,
+                "visible_area_percentage_of_aoi": null
+            },
+            "results": [],
+            "alternate_search_results": []
+        }
+    ],
+    "pagination": {
+        "per_page": 500,
+        "cursor": {
+            "next": null,
+            "self": "2023-07-11--2023-07-19"
+        }
+    }
+}
